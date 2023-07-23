@@ -109,5 +109,50 @@ globalThis.name = "Default";
 function global_name() {
     console.log("Default : " + this.name); //Default : Default
 }
+console.log("hi there : " + this.name);
 
 global_name.call();
+
+//
+function function1() {
+    console.log("first :");
+}
+
+function function1(a) {
+    console.log("second : " + a);
+}
+function1();
+function1(0);
+
+
+//Iterables and iterators
+
+//for an object to be classified as an iterator it should implement iterator protocol
+//iterator protocol states that it should implement a method at key [Symbol.iteraor] without any param
+//the object must have a next method, and it should contains two properties : 
+// 1. value : value of current object
+// 2. done : Iteration completed or not
+
+const my_iterator = {
+    [Symbol.iterator] : function() {
+        let step = 0;
+        const iterator = {
+            next: function() {
+                step++;
+                if (step === 1) {
+                    return {value : "Piyush", done : false};
+                } else if (step === 2) {
+                    return {value : "Tiwari", done:false};
+                } 
+                return {value : undefined, done:true};
+            }
+        };
+        return iterator;
+    }
+}
+
+
+// this is a for of loop, this loop is only executed by iterables
+for (const prop of my_iterator) {
+    console.log("VAL : " + prop); // VAL : Piyush VAL : Tiwari
+}
