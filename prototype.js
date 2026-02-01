@@ -52,5 +52,26 @@ console.log(Teacher.getName());
 const Student = {
     name : "Student",
 };
-Object.setPrototypeOf(Student, Teacher);
+
+//modern syntax
+// Object.setPrototypeOf(Student, Teacher);
+// console.log(Student.getName());
+
+//old syntax
+Student.__proto__ = Teacher;
 console.log(Student.getName());
+
+
+const str = "  space   "
+String.prototype.trueLength  = function() {
+    console.log(this);
+    return this.trim().length
+}
+String.prototype.trueString = function() {
+    const str = this.trim();
+    console.log(str.length);
+    return str;
+}
+
+console.log(str.trueLength());
+console.log("   __space__    ".trueString());
